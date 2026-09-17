@@ -6,12 +6,12 @@ It helps a user coordinate multiple coding harnesses and accounts without mixing
 
 ## Product shape
 
-Tero should support different entry harnesses, starting with Pi and later Hermes.
+Tero should support different entry harnesses. The first planned targets are Pi and Hermes.
 
 - Pi mode: coding-oriented control tower.
 - Hermes mode: task/kanban-oriented control tower.
 
-The implementation should not assume the author's local setup. It must be configurable for any user.
+The implementation must be configurable for any user and must not assume a specific local setup, account structure, or directory layout.
 
 ## Core principles
 
@@ -23,15 +23,9 @@ It must not scan repositories, list tasks, open terminals, or mutate files unles
 
 ### Global control tower
 
-Tero has a global home, separate from product repositories.
+Tero has a global home, separate from the repositories it orchestrates.
 
-For this repo:
-
-```txt
-/home/ces/Work/cm/tero
-```
-
-When Pi is started from this repo, it should behave as Tero's global control tower.
+When an entry harness is started from a Tero home checkout, it should behave as Tero's global control tower instead of assuming the current directory is the target project.
 
 ### Every action creates a task
 
@@ -62,11 +56,11 @@ The user-facing conversation can happen in any language.
 
 ## MVP scope
 
-The MVP focuses on Pi as an entry harness.
+The MVP focuses on Pi as the first entry harness.
 
 It should support:
 
-- global mode from this repo
+- global mode from a Tero home checkout
 - global task storage
 - manually configured accounts
 - manually configured agents/harnesses

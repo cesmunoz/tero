@@ -39,15 +39,11 @@ Tero keeps user state outside product repositories:
 
 Tero should not create repo-local state by default.
 
-## Control tower repo
+## Control tower checkout
 
-This repository is the orchestrator home during development:
+A Tero home checkout is the orchestrator control tower.
 
-```txt
-/home/ces/Work/cm/tero
-```
-
-Starting Pi here should put the assistant in global control tower mode.
+Starting an entry harness from a Tero home checkout should put the assistant in global control tower mode instead of project-local mode.
 
 ## Task storage
 
@@ -122,16 +118,26 @@ open(sessionId)
 
 ## Agent routing
 
-Projects define allowed agents and defaults.
+Projects define allowed agents, defaults, and optional fallback agents.
 
 Tero never routes a task to an agent that is not allowed for the selected project.
 
-Example policy from the initial user setup:
+Example shape:
 
-- work projects: default `claude-work`, fallback `opencode-work`
-- personal projects: default `pi-personal`, fallback only when needed
+```yaml
+projects:
+  project-alpha:
+    default_agent: pi-primary
+    fallback_agents:
+      - codex-primary
 
-This is user config, not a hardcoded product assumption.
+  project-beta:
+    default_agent: claude-secondary
+    fallback_agents:
+      - opencode-secondary
+```
+
+These names are user-defined labels. They do not imply any built-in account model.
 
 ## Account validation
 
